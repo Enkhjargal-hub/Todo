@@ -12,3 +12,22 @@ code {
     monospace;
 }
 
+.List {
+  border-color: pink;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Gol {
+  border-radius: 3px;
+}
+
+.All {
+  border-radius: 3px;
+}
+
+.Add {
+  background-color: pink;
+}

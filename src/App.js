@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div class="List">
+
+    <div class ="Main">
+   <h2>To-Do list</h2>
+
+   <div class="Gol">
+   <button>Add a new task...</button>
+   <button class="Add">Add</button>
+   </div>
+
+   <div class="All">
+   <button>All</button>
+   <button>Active</button>
+   <button>Completed</button>
+   </div>
+
+   <div>No task yet. Add one above!</div>
+
+  </div>
+
+    <div>Powered by Pinecone academy </div>
+  </div>
   );
 }
 
