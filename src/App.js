@@ -1,77 +1,102 @@
 
 import './App.css';
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 function App() {
-
-  let id=0;
-  const [todo, setTodo]=useState([]);
-
-  const [error, setError]=useState("");
-
-  const [inputValue, setInputValue]=useState("");
+  const [todo, setTodo] = useState([]);
+  const [error, setError] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [filterState, setFilterState] = useState("All");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-  }
+  };
 
-  const handleAddButton= ()=> {
-    if (inputValue.length === 0 ) {
-      setError ("Please Enter Todo Task");
+  const handleAddButton = () => {
+    if (inputValue.trim().length === 0) {
+      setError("Please Enter Todo Task");
       return;
     } else {
       setError("");
-      setTodo ([...todo, {text: inputValue, id:id+1, status: "Active"}]);
+      setTodo([
+        ...todo,
+        { text: inputValue.trim(), id: Date.now(), status: "Active" },
+      ]);
       setInputValue("");
     }
-  }
-  console.log(todo);
-  
+  };
+
+  const handleBox = (id) => {
+    setTodo((prevTodo) =>
+      prevTodo.map((task) =>
+        task.id === id
+          ? { ...task, status: task.status === "Completed" ? "Active" : "Completed" }
+          : task
+      )
+    );
+  };
+
+  const filteredTodos = todo.filter((task) => {
+    if (filterState === "All") {
+      return true;
+    } else {
+      return task.status === filterState;
+    }
+  });
+
   return (
-    
-    <div className= "...">
-      <input
-      placeholder="Add to do"
-      value = {inputValue}
-      onChange = {handleInputChange}
-      />
-      {error.length>1 && <div>{error}</div>}
-      <button Onclick= {handleAddButton}>Add</button>
-      {todo.map((todo)=> {
-        return<div>{todo.text}</div>;
-      })}
-      </div>/
- 
-     
+    <div className="Todo-App">
+      <div className="Main">
+        <h2>To-Do List</h2>
 
-    <div class="Todo-List">
+        <div className="Input-Section">
+          <input
+            placeholder="Add to do"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <button className="Add" onClick={handleAddButton}>
+            Add
+          </button>
+        </div>
 
-    <div class ="Main">
-   <h2>To-Do list</h2>
+        {error && <div className="Error">{error}</div>}
 
-   <div class="Gol">
-   <button class="Text">Add a new task...</button>
-   <button class="Add">Add</button>
-   </div>
+        <div className="Todo-List">
+          <div className="Filter">
+            <button className="Filter-1" onClick={() => setFilterState("All")}>
+              All
+            </button>
+            <button className="Filter-1" onClick={() => setFilterState("Active")}>
+              Active
+            </button>
+            <button className="Filter-1" onClick={() => setFilterState("Completed")}>
+              Completed
+            </button>
+          </div>
 
-   <div class="All">
-   <button>All</button>
-   <button>Active</button>
-   <button>Completed</button>
-   </div>
-   
-   <div class="Name">
-   <div>No task yet. Add one above!</div>
-   <div>Powered by Pinecone academy </div>
-   </div>
-  </div>
+          {filteredTodos.length === 0 ? (
+            <div className="No-Tasks">No task yet. Add one above!</div>
+          ) : (
+            filteredTodos.map((task) => (
+              <div key={task.id} className="Task">
+                <input
+                  type="checkbox"
+                  onChange={() => handleBox(task.id)}
+                  checked={task.status === "Completed"}
+                />
+                <span>{task.text}</span>
+              </div>
+            ))
+          )}
+        </div>
 
-  </div>
+        <div className="Footer">
+          <div>Powered by Pinecone academy</div>
+        </div>
+      </div>
+    </div>
   );
 }
-
-
-
-
 
 export default App;

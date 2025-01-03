@@ -1,13 +1,20 @@
-
-
-.Todo-List {
-  border-color: hotpink;
-  border-radius: 3px;
+.Todo-App {
+  border: 2px solid pink;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.Todo-List {
+  background-color: #fff;
+  border-radius: 3px;
+  margin-top: 15px;
+}
+.Main {
+  justify-content: center;
+  align-items: center;
+}
 .Gol {
   border-radius: 3px;
   display: flex;
@@ -22,14 +29,35 @@
 }
 
 .Add {
+  background-color: darkorchid;
+  border-radius: 6px;
+  gap: 3px;
+}
+
+.Input-section {
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.Footer {
+  color: #6B7280;
+  margin-top: 18px;
+}
+.No-Tasks {
+  color: #6B7280;
+  margin-top: 18px;
+}
+
+.text-1 {
+  margin-top: 10px;
+}
+
+.text-2 {
+  margin-top: 10px;
+}
+
+.Filter-1 {
   background-color: pink;
   border-radius: 6px;
-}
-
-.Name {
-  color: #6B7280;
-}
-
-.Text {
-  color: #E4E4E7;
+  gap: 5px;
 }
