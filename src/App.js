@@ -29,6 +29,21 @@ function App() {
   
   return (
     
+    <div className= "...">
+      <input
+      placeholder="Add to do"
+      value = {inputValue}
+      onChange = {handleInputChange}
+      />
+      {error.length>1 && <div>{error}</div>}
+      <button Onclick= {handleAddButton}>Add</button>
+      {todo.map((todo)=> {
+        return<div>{todo.text}</div>;
+      })}
+      </div>/
+ 
+     
+
     <div class="Todo-List">
 
     <div class ="Main">
