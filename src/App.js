@@ -11,8 +11,24 @@ function App() {
 
   const [inputValue, setInputValue]=useState("");
 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  }
 
+  const handleAddButton= ()=> {
+    if (inputValue.length === 0 ) {
+      setError ("Please Enter Todo Task");
+      return;
+    } else {
+      setError("");
+      setTodo ([...todo, {text: inputValue, id:id+1, status: "Active"}]);
+      setInputValue("");
+    }
+  }
+  console.log(todo);
+  
   return (
+    
     <div class="Todo-List">
 
     <div class ="Main">
