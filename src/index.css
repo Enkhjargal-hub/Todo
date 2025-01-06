@@ -45,6 +45,7 @@
 .No-Tasks {
   color: #6B7280;
   margin-top: 18px;
+  gap: 8px;
 }
 
 .text-1 {
@@ -59,4 +60,15 @@
   background-color: pink;
   border-radius: 6px;
   gap: 5px;
+}
+
+.Delete {
+  border-radius: 6px;
+  color: #EF4444;
+  background-color: #FEF2F2;
+  gap: 5px;
+}
+
+.Task {
+  gap: 8px;
 }

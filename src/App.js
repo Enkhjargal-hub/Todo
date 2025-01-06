@@ -36,6 +36,10 @@ function App() {
     );
   };
 
+  const handleDelete = (id) => {
+    setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
+  };
+
   const filteredTodos = todo.filter((task) => {
     if (filterState === "All") {
       return true;
@@ -86,6 +90,9 @@ function App() {
                   checked={task.status === "Completed"}
                 />
                 <span>{task.text}</span>
+                <button className="Delete" onClick={() => handleDelete(task.id)}>
+                  Delete
+                </button>
               </div>
             ))
           )}
