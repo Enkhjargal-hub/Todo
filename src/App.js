@@ -97,6 +97,10 @@ function App() {
             ))
           )}
         </div>
+        
+        <div className="Task-summery">
+          <span className="Task-count"></span>
+        </div>
 
         <div className="Footer">
           <div>Powered by</div>

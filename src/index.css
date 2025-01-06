@@ -25,11 +25,6 @@
   align-items: center;
 }
 
-.Gol {
-  border-radius: 3px;
-  display: flex;
-  justify-content: space-between;
-}
 
 .All {
   border-radius: 3px;
@@ -73,18 +68,18 @@
   gap: 3px;
 }
 
-.text-1 {
-  margin-top: 10px;
-}
-
-.text-2 {
-  margin-top: 10px;
+.Filter {
+  gap: 10px;
 }
 
 .Filter-1 {
   background-color: pink;
   border-radius: 6px;
-  gap: 5px;
+  color: #f9f9f9;
+  padding-inline: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .Delete {
