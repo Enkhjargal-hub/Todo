@@ -8,24 +8,26 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [filterState, setFilterState] = useState("All");
 
+  // Handle input change
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  // Handle adding a task
   const handleAddButton = () => {
     if (inputValue.trim().length === 0) {
-      setError("Please Enter Todo Task");
-      return;
+      setError("Please Enter a Todo Task");
     } else {
       setError("");
       setTodo([
         ...todo,
         { text: inputValue.trim(), id: Date.now(), status: "Active" },
       ]);
-      setInputValue("");
+      setInputValue(""); // Clear input field
     }
   };
 
+  // Handle toggling task status
   const handleBox = (id) => {
     setTodo((prevTodo) =>
       prevTodo.map((task) =>
@@ -36,28 +38,32 @@ function App() {
     );
   };
 
+  // Handle deleting a task
   const handleDelete = (id) => {
     setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
   };
 
+  // Filter tasks based on filterState
   const filteredTodos = todo.filter((task) => {
-    if (filterState === "All") {
-      return true;
-    } else {
-      return task.status === filterState;
-    }
+    if (filterState === "All") return true;
+    return task.status === filterState;
   });
 
   return (
     <div className="Todo-App">
       <div className="Main">
-        <h2 class="Header">To-Do List</h2>
+        <h2 className="Header">To-Do List</h2>
 
         <div className="Input-Section">
-          <input 
+          <input
             placeholder="Add a new task..."
             value={inputValue}
             onChange={handleInputChange}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                handleAddButton();
+              }
+            }}
           />
           <button className="Add" onClick={handleAddButton}>
             Add
@@ -80,7 +86,7 @@ function App() {
           </div>
 
           {filteredTodos.length === 0 ? (
-            <div className="No-Tasks">No task yet. Add one above!</div>
+            <div className="No-Tasks">No tasks yet. Add one above!</div>
           ) : (
             filteredTodos.map((task) => (
               <div key={task.id} className="Task">
@@ -97,10 +103,6 @@ function App() {
             ))
           )}
         </div>
-        
-        <div className="Task-summery">
-          <span className="Task-count"></span>
-        </div>
 
         <div className="Footer">
           <div>Powered by</div>
@@ -112,3 +114,5 @@ function App() {
 }
 
 export default App;
+
+
