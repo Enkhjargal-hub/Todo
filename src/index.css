@@ -1,20 +1,30 @@
 .Todo-App {
-  border: 2px solid pink;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .Todo-List {
-  background-color: #fff;
   border-radius: 3px;
   margin-top: 15px;
 }
 .Main {
   justify-content: center;
   align-items: center;
+  width: 350px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
 }
+.Header {
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
 .Gol {
   border-radius: 3px;
   display: flex;
@@ -29,23 +39,38 @@
 }
 
 .Add {
-  background-color: darkorchid;
   border-radius: 6px;
+  background-color: #3c82f6;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #f9f9f9;
+  padding-inline: 16px;
 }
 
 .Input-section {
-  gap: 6px;
+  width: 80%;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #e4e4e7;;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
   justify-content: space-between;
 }
 
 .Footer {
   color: #6B7280;
   margin-top: 18px;
+  display: flex;
+  gap: 3px;
 }
 .No-Tasks {
   color: #6B7280;
   margin-top: 18px;
-  gap: 8px;
+  display: flex;
+  gap: 3px;
 }
 
 .text-1 {
@@ -71,4 +96,17 @@
 
 .Task {
   gap: 8px;
+  color: #6B7280;
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Done {
+  color: #3B73ED;
 }

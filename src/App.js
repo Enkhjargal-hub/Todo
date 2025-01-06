@@ -51,11 +51,11 @@ function App() {
   return (
     <div className="Todo-App">
       <div className="Main">
-        <h2>To-Do List</h2>
+        <h2 class="Header">To-Do List</h2>
 
         <div className="Input-Section">
-          <input
-            placeholder="Add to do"
+          <input 
+            placeholder="Add a new task..."
             value={inputValue}
             onChange={handleInputChange}
           />
@@ -99,7 +99,8 @@ function App() {
         </div>
 
         <div className="Footer">
-          <div>Powered by Pinecone academy</div>
+          <div>Powered by</div>
+          <div className="Done">Pinecone academy</div>
         </div>
       </div>
     </div>
