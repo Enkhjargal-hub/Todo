@@ -127,6 +127,7 @@ body {
 
 .noo-tasks {
   margin-left: 8px;
+  margin-top: 15px;
 }
 
 .button-delete {
@@ -165,4 +166,9 @@ body {
 
 .Footer .Done {
   color: #3B73ED;
+}
+
+.Filter-1.active {
+  background-color: #fca5a5; 
+  color: white;
 }

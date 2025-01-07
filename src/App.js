@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useState } from "react";
+import moment from 'moment';
 
 function App() {
   const [todo, setTodo] = useState([]);
@@ -19,10 +20,15 @@ function App() {
       setError("Please Enter a Todo Task");
     } else {
       setError("");
-      setTodo([
-        ...todo,
-        { text: inputValue.trim(), id: Date.now(), status: "Active" },
-      ]);
+      const newTask = {
+        text: inputValue.trim(),
+        id: Date.now(),
+        status: "Active",
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        completedAt: null,
+        deletedAt: null,
+      };
+      setTodo([...todo, newTask]);
       setInputValue(""); // Clear input field
     }
   };
@@ -32,7 +38,11 @@ function App() {
     setTodo((prevTodo) =>
       prevTodo.map((task) =>
         task.id === id
-          ? { ...task, status: task.status === "Completed" ? "Active" : "Completed" }
+          ? {
+              ...task,
+              status: task.status === "Completed" ? "Active" : "Completed",
+              completedAt: task.status === "Completed" ? null : moment().format('YYYY-MM-DD HH:mm:ss'),
+            }
           : task
       )
     );
@@ -40,9 +50,14 @@ function App() {
 
   // Handle deleting a task
   const handleDelete = (id) => {
-    setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
+    setTodo((prevTodo) =>
+      prevTodo.map((task) =>
+        task.id === id
+          ? { ...task, deletedAt: moment().format('YYYY-MM-DD HH:mm:ss') }
+          : task
+      )
+    );
   };
-  
 
   // Filter tasks based on filterState
   const filteredTodos = todo.filter((task) => {
@@ -79,14 +94,29 @@ function App() {
 
         <div className="Todo-List">
           <div className="Filter">
-            <button className="Filter-1" onClick={() => setFilterState("All")}>
+            <button
+              className={`Filter-1 ${filterState === "All" ? "active" : ""}`}
+              onClick={() => setFilterState("All")}
+            >
               All
             </button>
-            <button className="Filter-1" onClick={() => setFilterState("Active")}>
+            <button
+              className={`Filter-1 ${filterState === "Active" ? "active" : ""}`}
+              onClick={() => setFilterState("Active")}
+            >
               Active
             </button>
-            <button className="Filter-1" onClick={() => setFilterState("Completed")}>
+            <button
+              className={`Filter-1 ${filterState === "Completed" ? "active" : ""}`}
+              onClick={() => setFilterState("Completed")}
+            >
               Completed
+            </button>
+            <button
+              className={`Filter-1 ${filterState === "Log" ? "active" : ""}`}
+              onClick={() => setFilterState("Log")}
+            >
+              Log
             </button>
           </div>
 
@@ -104,6 +134,11 @@ function App() {
                 <button className="Delete" onClick={() => handleDelete(task.id)}>
                   Delete
                 </button>
+                <div className="Task-Times">
+                  <span>Created: {task.createdAt}</span>
+                  {task.status === "Completed" && <span>Completed: {task.completedAt}</span>}
+                  {task.deletedAt && <span>Deleted: {task.deletedAt}</span>}
+                </div>
               </div>
             ))
           )}
@@ -135,6 +170,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
