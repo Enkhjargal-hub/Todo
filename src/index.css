@@ -50,7 +50,6 @@ body {
   font-size: 1rem;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .Input-Section button:hover {
@@ -79,7 +78,6 @@ body {
   padding: 5px 10px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background 0.3s ease;
 }
 
 .Filter-1:hover {
@@ -120,7 +118,6 @@ body {
   font-size: 0.9rem;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .Task .Delete:hover {
@@ -140,7 +137,6 @@ body {
   font-size: 0.9rem;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
   justify-content: flex-end;
 }
 

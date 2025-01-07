@@ -40,15 +40,9 @@ function App() {
 
   // Handle deleting a task
   const handleDelete = (id) => {
-    const taskToDelete = todo.find((task) => task.id === id);
-    if (taskToDelete && taskToDelete.status !== "Completed") {
-      setError("Only completed tasks can be deleted!");
-      setTimeout(() => setError(""), 3000); // Clear error after 3 seconds
-      return;
-    }
-
     setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
   };
+  
 
   // Filter tasks based on filterState
   const filteredTodos = todo.filter((task) => {
