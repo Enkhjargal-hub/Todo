@@ -57,8 +57,8 @@ function App() {
   });
 
   // Calculate total and completed tasks
-  const totalTasks = todo.length;
-  const completedTasks = todo.filter((task) => task.status === "Completed").length;
+  const totalCount = todo.length;
+  const completedCount = todo.filter((task) => task.status === "Completed").length;
 
   return (
     <div className="Todo-App">
@@ -115,6 +115,22 @@ function App() {
           )}
         </div>
 
+        {totalCount > 0 && (
+          <div className="noo-tasks">
+            <span className="task-count">
+              {`${completedCount} of ${totalCount} tasks completed`}
+            </span>
+            {completedCount > 0 && (
+              <button
+                className="button-delete"
+                onClick={() => setTodo(todo.filter((task) => task.status !== "Completed"))}
+              >
+                Clear completed
+              </button>
+            )}
+          </div>
+        )}
+
         <div className="Footer">
           <div>Powered by</div>
           <div className="Done">Pinecone academy</div>
@@ -125,6 +141,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
