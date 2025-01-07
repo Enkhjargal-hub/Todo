@@ -40,6 +40,13 @@ function App() {
 
   // Handle deleting a task
   const handleDelete = (id) => {
+    const taskToDelete = todo.find((task) => task.id === id);
+    if (taskToDelete && taskToDelete.status !== "Completed") {
+      setError("Only completed tasks can be deleted!");
+      setTimeout(() => setError(""), 3000); // Clear error after 3 seconds
+      return;
+    }
+
     setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
   };
 
@@ -48,6 +55,10 @@ function App() {
     if (filterState === "All") return true;
     return task.status === filterState;
   });
+
+  // Calculate total and completed tasks
+  const totalTasks = todo.length;
+  const completedTasks = todo.filter((task) => task.status === "Completed").length;
 
   return (
     <div className="Todo-App">
@@ -114,5 +125,7 @@ function App() {
 }
 
 export default App;
+
+
 
 

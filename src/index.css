@@ -1,107 +1,148 @@
-.Todo-App {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f4f6;
+  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.Todo-List {
-  border-radius: 3px;
-  margin-top: 15px;
-}
-.Main {
-  justify-content: center;
-  align-items: center;
-  width: 350px;
-  background-color: #FFFFFF;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+.Todo-App {
+  background: #fff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 8px;
 }
+
+
 .Header {
-  font-size: 20px;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a90e2;
+  margin-bottom: 20px;
 }
 
 
-.All {
-  border-radius: 3px;
+.Input-Section {
   display: flex;
-  justify-content: flex-start;
-  gap: 6px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.Add {
-  border-radius: 6px;
-  background-color: #3c82f6;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #f9f9f9;
-  padding-inline: 16px;
-}
-
-.Input-section {
-  width: 80%;
-  font-size: 16px;
+.Input-Section input {
+  flex: 1;
   padding: 10px;
-  border: 1px solid #e4e4e7;;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.Input-Section button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.Input-Section button:hover {
+  background: #357ab8;
+}
+
+/* Error Message */
+.Error {
+  color: red;
+  font-size: 0.9rem;
   margin-bottom: 10px;
-  border-radius: 6px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Filter Section */
+.Filter {
   display: flex;
   justify-content: space-between;
-}
-
-.Footer {
-  color: #6B7280;
-  margin-top: 18px;
-  display: flex;
-  gap: 3px;
-}
-.No-Tasks {
-  color: #6B7280;
-  margin-top: 18px;
-  display: flex;
-  gap: 3px;
-}
-
-.Filter {
-  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .Filter-1 {
-  background-color: pink;
-  border-radius: 6px;
-  color: #f9f9f9;
-  padding-inline: 16px;
-  border: none;
+  background: #f3f4f6;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
 }
 
-.Delete {
-  border-radius: 6px;
-  color: #EF4444;
-  background-color: #FEF2F2;
-  gap: 5px;
+.Filter-1:hover {
+  background: #e2e6ea;
 }
+
 
 .Task {
-  gap: 8px;
-  color: #6B7280;
-  margin-top: 18px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   padding: 10px;
-  background-color: #FFFFFF;
   margin-bottom: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
 }
 
-.Done {
-  color: #3B73ED;
+.Task:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Task input {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.Task span {
+  flex: 1;
+  font-size: 1rem;
+}
+
+.Task .Delete {
+  background: #FEF2F2;
+  color: #EF4444;
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
+
+.No-Tasks {
+  text-align: center;
+  font-size: 1rem;
+  color: #888;
+}
+
+
+.Footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.Footer .Done {
+  font-weight: bold;
+  color: #4a90e2;
 }
