@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import moment from 'moment';
 
 function App() {
-  const [todo, setTodo] = useState([]);
-  const [error, setError] = useState("");
-  const [inputValue, setInputValue] = useState("");
-  const [filterState, setFilterState] = useState("All");
+  const [todo, setTodo] = useState([]);  // Бүх кодыг хадгална. Эхний утга нь хоосон массив./
+  const [error, setError] = useState("");  // Хэрэглэгч алдаа гаргасан тохиолдолд мессеж хадгалах хувьсагч./
+  const [inputValue, setInputValue] = useState(""); // Хэрэглэгчийн оруулсан текстийг хадгалах хувьсагч./
+  const [filterState, setFilterState] = useState("All"); // Шүүнэ. (All, Active, Completed, Log гэх мэт).
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-  };
+  };  // Оруулсан текстийн утгыг inputValue-д хадгална./
 
   const handleAddButton = () => {
     if (inputValue.trim().length === 0) {
@@ -29,7 +29,7 @@ function App() {
       setTodo([...todo, newTask]);
       setInputValue("");
     }
-  };
+  };  // Шинэ таск нэмж одоогийн жагсаалтанд нэмсэний дараа ажиллана. Хоосон текст оруулахыг зөвшөөрөхгүй./
 
   const handleBox = (id) => {
     setTodo((prevTodo) =>
@@ -43,16 +43,22 @@ function App() {
           : task
       )
     );
-  };
+  }; // Тухайн таскыг идэвхтэй эсвэл дуусгасан гэж тэмдэглэнэ. Дууссан тохиолдолд дууссан хугацааг хадгална./
 
   const handleDelete = (id) => {
-    setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
-  };
+    setTodo((prevTodo) =>
+      prevTodo.map((task) =>
+        task.id === id
+          ? { ...task, deletedAt: moment().format('YYYY-MM-DD HH:mm:ss') }
+          : task
+      )
+    );
+  }; // Тухайн таскыг жагсаалтаас устгана. (Гэхдээ устгахгүй, deletedAt-д хадгална)
 
   const filteredTodos = todo.filter((task) => {
-    if (filterState === "All") return true;
-    if (filterState === "Log") return true; // Log should show all tasks with times
-    return task.status === filterState;
+    if (filterState === "All") return !task.deletedAt; 
+    if (filterState === "Log") return !!task.deletedAt; 
+    return task.status === filterState && !task.deletedAt; 
   });
 
   const totalCount = todo.length;
@@ -82,47 +88,23 @@ function App() {
         {error && <div className="Error">{error}</div>}
 
         <div className="Todo-List">
-          <div className="Filter">
-            <button
-              className={`Filter-1 ${filterState === "All" ? "active" : ""}`}
-              onClick={() => setFilterState("All")}
-            >
-              All
-            </button>
-            <button
-              className={`Filter-1 ${filterState === "Active" ? "active" : ""}`}
-              onClick={() => setFilterState("Active")}
-            >
-              Active
-            </button>
-            <button
-              className={`Filter-1 ${filterState === "Completed" ? "active" : ""}`}
-              onClick={() => setFilterState("Completed")}
-            >
-              Completed
-            </button>
-            <button
-              className={`Filter-1 ${filterState === "Log" ? "active" : ""}`}
-              onClick={() => setFilterState("Log")}
-            >
-              Log
-            </button>
-          </div>
-
+         
           {filterState === "Log" ? (
-            todo.length === 0 ? (
+            todo.filter((task) => task.deletedAt).length === 0 ? (
               <div className="No-Tasks">No logs available yet!</div>
             ) : (
-              todo.map((task) => (
-                <div key={task.id} className="Task">
-                  <span>{task.text}</span>
-                  <div className="Task-Times">
-                    <span>Created: {task.createdAt}</span>
-                    {task.status === "Completed" && <span>Completed: {task.completedAt}</span>}
-                    {task.deletedAt && <span>Deleted: {task.deletedAt}</span>}
+              todo
+                .filter((task) => task.deletedAt)
+                .map((task) => (
+                  <div key={task.id} className="Task">
+                    <span>{task.text}</span>
+                    <div className="Task-Times">
+                      <span>Created: {task.createdAt}</span>
+                      {task.status === "Completed" && <span>Completed: {task.completedAt}</span>}
+                      <span>Deleted: {task.deletedAt}</span>
+                    </div>
                   </div>
-                </div>
-              ))
+                ))
             )
           ) : filteredTodos.length === 0 ? (
             <div className="No-Tasks">No tasks yet. Add one above!</div>
@@ -169,6 +151,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
