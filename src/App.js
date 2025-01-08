@@ -9,12 +9,10 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [filterState, setFilterState] = useState("All");
 
-  // Handle input change
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  // Handle adding a task
   const handleAddButton = () => {
     if (inputValue.trim().length === 0) {
       setError("Please Enter a Todo Task");
@@ -29,11 +27,10 @@ function App() {
         deletedAt: null,
       };
       setTodo([...todo, newTask]);
-      setInputValue(""); // Clear input field
+      setInputValue("");
     }
   };
 
-  // Handle toggling task status
   const handleBox = (id) => {
     setTodo((prevTodo) =>
       prevTodo.map((task) =>
@@ -48,24 +45,16 @@ function App() {
     );
   };
 
-  // Handle deleting a task
   const handleDelete = (id) => {
-    setTodo((prevTodo) =>
-      prevTodo.map((task) =>
-        task.id === id
-          ? { ...task, deletedAt: moment().format('YYYY-MM-DD HH:mm:ss') }
-          : task
-      )
-    );
+    setTodo((prevTodo) => prevTodo.filter((task) => task.id !== id));
   };
 
-  // Filter tasks based on filterState
   const filteredTodos = todo.filter((task) => {
     if (filterState === "All") return true;
+    if (filterState === "Log") return true; // Log should show all tasks with times
     return task.status === filterState;
   });
 
-  // Calculate total and completed tasks
   const totalCount = todo.length;
   const completedCount = todo.filter((task) => task.status === "Completed").length;
 
@@ -120,7 +109,22 @@ function App() {
             </button>
           </div>
 
-          {filteredTodos.length === 0 ? (
+          {filterState === "Log" ? (
+            todo.length === 0 ? (
+              <div className="No-Tasks">No logs available yet!</div>
+            ) : (
+              todo.map((task) => (
+                <div key={task.id} className="Task">
+                  <span>{task.text}</span>
+                  <div className="Task-Times">
+                    <span>Created: {task.createdAt}</span>
+                    {task.status === "Completed" && <span>Completed: {task.completedAt}</span>}
+                    {task.deletedAt && <span>Deleted: {task.deletedAt}</span>}
+                  </div>
+                </div>
+              ))
+            )
+          ) : filteredTodos.length === 0 ? (
             <div className="No-Tasks">No tasks yet. Add one above!</div>
           ) : (
             filteredTodos.map((task) => (
@@ -134,11 +138,6 @@ function App() {
                 <button className="Delete" onClick={() => handleDelete(task.id)}>
                   Delete
                 </button>
-                <div className="Task-Times">
-                  <span>Created: {task.createdAt}</span>
-                  {task.status === "Completed" && <span>Completed: {task.completedAt}</span>}
-                  {task.deletedAt && <span>Deleted: {task.deletedAt}</span>}
-                </div>
               </div>
             ))
           )}
