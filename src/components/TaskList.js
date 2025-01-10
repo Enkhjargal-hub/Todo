@@ -1,14 +1,29 @@
 import React from "react";
 
 const TaskList = ({ tasks, handleBox, handleDelete, isLogView }) => {
+  if (tasks.length === 0) {
+    return <div className="No-Tasks">{isLogView ? "No logs available yet!" : "No tasks yet. Add one above!"}</div>;
+  }
+
   return (
     <div className="Todo-List">
-      {isLogView ? (
-        tasks.length === 0 ? (
-          <div className="No-Tasks">No logs available yet!</div>
-        ) : (
-          tasks.map((task) => (
-            <div key={task.id} className="Task">
+      {tasks.map((task) => (
+        <div key={task.id} className="Task">
+          {!isLogView && (
+            <>
+              <input
+                type="checkbox"
+                checked={task.status === "Completed"}
+                onChange={() => handleBox(task.id)}
+              />
+              <span>{task.text}</span>
+              <button className="Delete" onClick={() => handleDelete(task.id)}>
+                Delete
+              </button>
+            </>
+          )}
+          {isLogView && (
+            <div>
               <span>{task.text}</span>
               <div className="Task-Times">
                 <span>Created: {task.createdAt}</span>
@@ -16,25 +31,9 @@ const TaskList = ({ tasks, handleBox, handleDelete, isLogView }) => {
                 <span>Deleted: {task.deletedAt}</span>
               </div>
             </div>
-          ))
-        )
-      ) : tasks.length === 0 ? (
-        <div className="No-Tasks">No tasks yet. Add one above!</div>
-      ) : (
-        tasks.map((task) => (
-          <div key={task.id} className="Task">
-            <input
-              type="checkbox"
-              onChange={() => handleBox(task.id)}
-              checked={task.status === "Completed"}
-            />
-            <span>{task.text}</span>
-            <button className="Delete" onClick={() => handleDelete(task.id)}>
-              Delete
-            </button>
-          </div>
-        ))
-      )}
+          )}
+        </div>
+      ))}
     </div>
   );
 };

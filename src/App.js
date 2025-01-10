@@ -58,11 +58,11 @@ function App() {
   };
 
   const filteredTodos = todo.filter((task) => {
-    if (filterState === "All") return !task.deletedAt;
-    if (filterState === "Log") return !!task.deletedAt;
-    return task.status === filterState && !task.deletedAt;
+    if (filterState === "All") return !task.deletedAt; // Устгагдаагүй бүх task-ууд
+    if (filterState === "Log") return !!task.deletedAt; // Зөвхөн устгагдсан task-ууд
+    return task.status === filterState && !task.deletedAt; // Active эсвэл Completed статус бүхий устгагдаагүй task-ууд
   });
-
+  
   const isLogView = filterState === "Log";
 
   return (
